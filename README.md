@@ -91,6 +91,10 @@ pipx install -e .
 <hr>
 
 <div align="center">
+
+<p>💬 I’d be super happy to get your feedback! This is just the beginning, and the project will continue to grow and improve. Your thoughts and suggestions are very welcome!</p>
+
 <p><strong>Made with ❤️ and Python</strong></p>
 <p>If you like this tool — give it a ⭐ on GitHub!</p>
+
 </div>
