@@ -22,3 +22,6 @@ dependencies = [
 
 [project.scripts]
 cryo = "cryo:main"
+
+[tool.setuptools]
+py-modules = ["cryo"]
