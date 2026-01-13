@@ -7,7 +7,7 @@ critical_names = {'systemd', 'init', 'bash', 'zsh', 'sh', 'sshd', 'Xorg', 'gnome
 
 def if_save(proc):
 	try:
-		if (proc.pid <=1 and proc >=1000) or proc.pid == os.getpid() or proc.pid == os.getppid():
+		if proc.pid < 1000 or proc.pid == os.getpid() or proc.pid == os.getppid():
 			return False
 		if proc.name in critical_names:
 			return False
@@ -16,15 +16,19 @@ def if_save(proc):
 		return False
 
 def show_all_procs():
-	print("Active processes")
+	print("~~~Active processes~~~")
 	for proc in psutil.process_iter(['pid','name']):
-		print(proc.info['name'])
+		try:
+			print(f"{proc.info['pid']} - {proc.info['name']}")
+		except: pass
 
 
 def find_pid(name):
 	for proc in psutil.process_iter(['pid','name']):
-		if name == proc.info['name']:
-			return proc
+		try:
+			if name == proc.info['name']:
+				return proc
+		except: continue
 	print("Cannot find proc "+name)
 	return None
 
@@ -32,12 +36,13 @@ def find_children(name):
 	pid_parent = find_pid(name)
 	if not pid_parent:
 		print("Proc "+name+" doesn`t exist")
-		return
+		return 
 	try:
 		children = pid_parent.children(recursive=True)
 		return [pid_parent]+list(children)
 	except:
 		print("Cannot find children for "+name)
+		return
 
 def main():
 	parser = argparse.ArgumentParser(
@@ -62,6 +67,10 @@ def main():
 		parser.print_help()
 		return
 
+	if args.command == "show":
+		show_all_procs()
+		return
+
 	name = args.name
 	procs = find_children(name)
 	if not procs:
@@ -77,8 +86,6 @@ def main():
 				proc.suspend()
 			elif args.command == "unfreeze":
 				proc.resume()
-			elif args.command == "show":
-				show_all_procs()
 		except:
 			pass
 
