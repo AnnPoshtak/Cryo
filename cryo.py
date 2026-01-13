@@ -1,12 +1,13 @@
 import psutil
 import sys
 import os
+import argparse
 
 critical_names = {'systemd', 'init', 'bash', 'zsh', 'sh', 'sshd', 'Xorg', 'gnome-shell', 'kwin_wayland'}
 
 def if_save(proc):
 	try:
-		if proc.pid <=1 or proc.pid == os.getpid() or proc.pid == os.getppid():
+		if (proc.pid <=1 and proc >=1000) or proc.pid == os.getpid() or proc.pid == os.getppid():
 			return False
 		if proc.name in critical_names:
 			return False
@@ -14,10 +15,15 @@ def if_save(proc):
 	except:
 		return False
 
+def show_all_procs():
+	print("Active processes")
+	for proc in psutil.process_iter(['pid','name']):
+		print(proc.info['name'])
+
 
 def find_pid(name):
 	for proc in psutil.process_iter(['pid','name']):
-		if name in proc.info['name']:
+		if name == proc.info['name']:
 			return proc
 	print("Cannot find proc "+name)
 	return None
@@ -34,13 +40,29 @@ def find_children(name):
 		print("Cannot find children for "+name)
 
 def main():
+	parser = argparse.ArgumentParser(
+			description="Cryo: Process Freezer. Stop app without closin them.",
+			epilog="Example: cryo freeze firefox"
+	)
+
+	subparsers = parser.add_subparsers(dest="command", required=True, help="Aviable commands")
+
+
+	freeze_parser = subparsers.add_parser("freeze", help="Freeze a Process tree")
+	freeze_parser.add_argument("name", type=str, help="Process name (e.g., firefox)")
+
+	unfreeze_parser = subparsers.add_parser("unfreeze", help="Unreeze a Process tree")
+	unfreeze_parser.add_argument("name", type=str, help="Process name (e.g., firefox)")
+
+	show_procs = subparsers.add_parser("show", help="Show all active processes")
+
 	try:
-		action = sys.argv[1]
-		name = sys.argv[2]
+		args = parser.parse_args()
 	except:
-		print("Invalid arguments usage. Use: 'python main.py [freeze|unfreeze] [process_name]'")
+		parser.print_help()
 		return
 
+	name = args.name
 	procs = find_children(name)
 	if not procs:
 		print("We dont find any processes for "+name)
@@ -51,10 +73,12 @@ def main():
 			print("System critical proc")
 			continue
 		try:
-			if action == "freeze":
+			if args.command == "freeze":
 				proc.suspend()
-			elif action == "unfreeze":
+			elif args.command == "unfreeze":
 				proc.resume()
+			elif args.command == "show":
+				show_all_procs()
 		except:
 			pass
 
