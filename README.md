@@ -38,6 +38,7 @@ Python 3.10+ is required. We recommend using pipx to keep your system clean.
 1. System Prep (Python + pipx)
 
 Choose your distro:
+
 ```shell
 #🐧 Arch Linux / Manjaro
 
@@ -49,9 +50,11 @@ sudo apt update && sudo apt install python3 pipx
 
 #🔵 Fedora
 
-sudo dnf update && sudo dnf install python3 pipx```
+sudo dnf update && sudo dnf install python3 pipx
+```
 
 2. Install Cryo
+
 ```shell
 # Clone the code
 git clone https://github.com/AnnPoshtak/Cryo
@@ -63,7 +66,8 @@ cd Cryo
 pipx install -e .
 
 # Optional: ensure PATH is set
-pipx ensurepath```
+pipx ensurepath
+```
 
 🔥 Final Step: Restart your terminal or log out/in so cryo command is recognized.
 
