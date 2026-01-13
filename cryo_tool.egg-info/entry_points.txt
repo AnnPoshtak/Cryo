@@ -1,0 +1,2 @@
+[console_scripts]
+cryo = cryo:main

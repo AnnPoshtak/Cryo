@@ -3,13 +3,9 @@ import sys
 import os
 import argparse
 
-critical_names = {'systemd', 'init', 'bash', 'zsh', 'sh', 'sshd', 'Xorg', 'gnome-shell', 'kwin_wayland'}
-
 def if_save(proc):
 	try:
 		if proc.pid < 1000 or proc.pid == os.getpid() or proc.pid == os.getppid():
-			return False
-		if proc.name in critical_names:
 			return False
 		return True
 	except:
@@ -19,6 +15,8 @@ def show_all_procs():
 	print("~~~Active processes~~~")
 	for proc in psutil.process_iter(['pid','name']):
 		try:
+			if proc.info['pid'] < 1000:
+				continue
 			print(f"{proc.info['pid']} - {proc.info['name']}")
 		except: pass
 
