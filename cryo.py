@@ -3,7 +3,7 @@ import sys
 import os
 import argparse
 
-def if_save(proc):
+def if_safe(proc):
 	try:
 		if proc.pid < 1000 or proc.pid == os.getpid() or proc.pid == os.getppid():
 			return False
@@ -34,13 +34,13 @@ def find_children(name):
 	pid_parent = find_pid(name)
 	if not pid_parent:
 		print("Proc "+name+" doesn`t exist")
-		return 
+		return []
 	try:
 		children = pid_parent.children(recursive=True)
-		return [pid_parent]+list(children)
+		return [*[pid_parent],*list(children)]
 	except:
 		print("Cannot find children for "+name)
-		return
+		return[]
 
 def main():
 	parser = argparse.ArgumentParser(
@@ -76,7 +76,7 @@ def main():
 		return
 
 	for proc in procs:
-		if not if_save(proc):
+		if not if_safe(proc):
 			print("System critical proc")
 			continue
 		try:
