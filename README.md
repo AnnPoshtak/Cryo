@@ -40,15 +40,15 @@ Python 3.10+ is required. We recommend using pipx to keep your system clean.
 Choose your distro:
 
 ```shell
-#🐧 Arch Linux / Manjaro
+#Arch Linux / Manjaro
 
 sudo pacman -Syu python python-pipx
 
-#🟠 Ubuntu / Debian
+#Ubuntu / Debian
 
 sudo apt update && sudo apt install python3 pipx
 
-#🔵 Fedora
+#Fedora
 
 sudo dnf update && sudo dnf install python3 pipx
 ```
