@@ -40,15 +40,12 @@ Choose your distro:
 
 ```shell
 #Arch Linux / Manjaro
-
 sudo pacman -Syu python python-pipx
 
 #Ubuntu / Debian
-
 sudo apt update && sudo apt install python3 pipx
 
 #Fedora
-
 sudo dnf update && sudo dnf install python3 pipx
 ```
 
@@ -91,6 +88,12 @@ Brings the application back exactly where you left off.
 cryo unfreeze firefox
 ```
 
+🖥️ Show all processes 
+Shows all processes with their PID
+
+```shell
+cryo show
+```
 ---
 
 <div align="center">💬 Cryo is just getting started! Your feedback helps make it better for everyone.
