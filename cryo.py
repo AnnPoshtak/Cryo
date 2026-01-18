@@ -21,6 +21,13 @@ def show_all_procs():
 		except:
 			pass
 
+def proc_status(name):
+	proc = find_pid(name)
+	if proc.status() == psutil.STATUS_STOPPED:
+		print("Process is frozen ❄️")
+	else:
+		print("Process is running 🟢")
+
 
 def find_pid(name):
 	for proc in psutil.process_iter(['pid', 'name']):
@@ -76,6 +83,17 @@ def main():
 		help="Process name (e.g., firefox)"
 	)
 
+	status_parser = subparsers.add_parser(
+		"status",
+		help="Show process status (e.g freeze/running)"
+	)
+
+	status_parser.add_argument(
+		"name",
+		type=str,
+		help="Process name (e.g., firefox)"
+	)
+
 	show_procs = subparsers.add_parser(
 		"show",
 		help="Show all active processes"
@@ -90,6 +108,10 @@ def main():
 	if args.command == "show":
 		show_all_procs()
 		return
+	elif args.command == "status":
+		proc_status(args.name)
+		return
+
 
 	name = args.name
 	procs = find_children(name)
