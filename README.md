@@ -88,12 +88,20 @@ Brings the application back exactly where you left off.
 cryo unfreeze firefox
 ```
 
-🖥️ Show all processes 
+🖥️ Show
 
 Shows all processes with their PID
 
 ```shell
 cryo show
+```
+
+🔌 Status
+
+Shows the status of the selected process
+
+```shell
+cryo status firefox
 ```
 ---
 
