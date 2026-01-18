@@ -89,6 +89,7 @@ cryo unfreeze firefox
 ```
 
 🖥️ Show all processes 
+
 Shows all processes with their PID
 
 ```shell
