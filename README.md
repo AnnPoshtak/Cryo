@@ -8,6 +8,9 @@ Absolute Zero for Your Processes
 <img src="https://img.shields.io/badge/license-MIT-green?style=for-the-badge">
 </p><p><strong>Cryo is a CLI tool that instantly "pauses" processes to free up CPU resources.</strong><br>
 No need to close apps or lose your work — just put them into a temporary "coma" and bring them back whenever you want.</p><p>
+
+⚠️ This project is currently in maintenance mode. I'm busy with other projects, but I actively welcome and review Pull Requests from the community!
+
 </p></div><hr>🚀 Why Cryo?
 
 Tired of your CPU overheating while dozens of browser tabs or apps are running? Cryo pauses them instantly without closing anything.
