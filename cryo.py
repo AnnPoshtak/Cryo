@@ -116,11 +116,9 @@ def main():
         return
     
     for name in args.name:
-        pid = find_pid(name)
         procs = find_children(name)
         if not procs:
             print("We didn't find any processes for " + name)
-            return
 
         for proc in procs:
             if not if_safe(proc):
