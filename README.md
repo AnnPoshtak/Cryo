@@ -10,12 +10,6 @@ Absolute Zero for Your Processes
 
 <p><strong>Cryo is a blazing-fast CLI tool written in Rust that instantly "pauses" processes to free up CPU resources.</strong><br>
 No need to close apps or lose your work — just put them into a temporary "coma" and bring them back whenever you want.</p>
-
-<p>
-
-⚠️ This project is currently in maintenance mode. I'm busy with other projects, but I actively welcome and review Pull Requests from the community!
-
-</p>
 </div>
 
 <hr>
