@@ -57,6 +57,7 @@ Take control of your CPU — just freeze and unfreeze.
 Suspends the application and all its sub-processes instantly.
 ```shell
 cryo freeze firefox
+cryo freeze firefox vlc obs
 ```
 
 🥵 Unfreeze
@@ -64,6 +65,7 @@ cryo freeze firefox
 Brings the application back exactly where you left off.
 ```shell
 cryo unfreeze firefox
+cryo unfreeze firefox vlc obs
 ```
 
 🖥️ Show
@@ -80,6 +82,7 @@ Shows the status of the selected process
 
 ```shell
 cryo status firefox
+cryo status firefox vlc obs
 ```
 ---
 
